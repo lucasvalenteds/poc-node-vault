@@ -72,3 +72,13 @@ test("It can read service URL from production environment", async () => {
     apiToken: "e1d80eef6ddd05ec5fc78583ee9317a0",
   });
 });
+
+test("It throws error for key not found", async () => {
+  expect.assertions(1);
+
+  try {
+    await client.read("cubbyhole/qa");
+  } catch (error) {
+    expect(error.message).toStrictEqual("Status 404");
+  }
+});
