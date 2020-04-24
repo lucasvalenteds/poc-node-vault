@@ -7,6 +7,9 @@
     "test": "jest",
     "build": "tsc"
   },
+  "dependencies": {
+    "node-vault": "0.9.15"
+  },
   "devDependencies": {
     "@types/jest": "25.1.4",
     "@types/node": "13.9.1",
