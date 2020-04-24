@@ -33,21 +33,24 @@ afterAll(async (done) => {
 });
 
 beforeEach(async (done) => {
-  await client.write("cubbyhole/dev", {
-    serviceUrl: "http://dev.service.com/api",
-  });
-
-  await client.write("cubbyhole/prod", {
-    serviceUrl: "https://api.service.com",
-    apiToken: "e1d80eef6ddd05ec5fc78583ee9317a0",
-  });
+  await Promise.all([
+    client.write("cubbyhole/dev", {
+      serviceUrl: "http://dev.service.com/api",
+    }),
+    client.write("cubbyhole/prod", {
+      serviceUrl: "https://api.service.com",
+      apiToken: "e1d80eef6ddd05ec5fc78583ee9317a0",
+    }),
+  ]);
 
   done();
 });
 
 afterEach(async (done) => {
-  await client.delete("cubbyhole/dev");
-  await client.delete("cubbyhole/prod");
+  await Promise.all([
+    client.delete("cubbyhole/dev"),
+    client.delete("cubbyhole/prod"),
+  ]);
 
   done();
 });
